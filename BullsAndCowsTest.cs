@@ -1,9 +1,12 @@
 ﻿
-public class BullsAndCowsTest
+namespace BullsAndCows
 {
-    static void Main(string[] args)
+    public class BullsAndCowsTest
     {
-		cows_buls.Play();
+        static void Main(string[] args)
+        {
+            Engine engine = new Engine();
+            engine.Play();
+        }
     }
 }
-
