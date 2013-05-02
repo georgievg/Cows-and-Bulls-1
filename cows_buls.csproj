@@ -42,9 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bull.cs" />
+    <Compile Include="CommandExecutor.cs" />
+    <Compile Include="Cow.cs" />
     <Compile Include="cows_buls.cs" />
     <Compile Include="BullsAndCowsTest.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="HallOfFame.cs" />
     <Compile Include="PlayerInfo.cs" />
+    <Compile Include="UserInterface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
