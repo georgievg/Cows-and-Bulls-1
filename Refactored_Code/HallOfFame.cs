@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace BullsAndCows
 {
+    /// <summary>
+    /// Class holding the high scores
+    /// </summary>
     public static class HallOfFame
     {
+        /// <summary>
+        /// List of all <see cref="PlayerInfo"/> instances
+        /// </summary>
         private static List<PlayerInfo> scoreHolder;
-       
 
-         static HallOfFame()
+        /// <summary>
+        /// Initializes static members of the <see cref="HallOfFame"/> class which holds <see cref="PlayerInfo"/>
+        /// </summary>
+        static HallOfFame()
         {
             scoreHolder = new List<PlayerInfo>();
         }
 
+        /// <summary>
+        /// Adds player to the scoreboard
+        /// </summary>
+        /// <param name="guesses">Amount of guesses it took of the player</param>
+        /// <param name="numberOfCheats">How many cheats he used</param>
         public static void AddPlayerToScoreboard(int guesses, int numberOfCheats)
         {
             if (numberOfCheats > 0)
@@ -35,60 +47,99 @@ namespace BullsAndCows
             }
         }
 
-       public static void PrintScoreboard()
+        /// <summary>
+        /// Prints the scoreboard of top players
+        /// </summary>
+        public static void PrintScoreBoard()
         {
-            Console.WriteLine();
+            string scoreBoard = GenerateScoreBoard();
+            Console.WriteLine(scoreBoard);
+        }
+
+        /// <summary>
+        /// Generates the scoreboard of all players
+        /// </summary>
+        /// <returns>String of the generated scoreboard</returns>
+        private static string GenerateScoreBoard()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine();
             if (scoreHolder.Count > 0)
             {
-                Console.WriteLine("Scoreboard:");
+                sb.AppendLine("Scoreboard:");
                 scoreHolder.Sort();
                 int currentPosition = 1;
-                Console.WriteLine("  {0,7} | {1}", "Guesses", "Name");
-                PrintLine(40);
+                sb.AppendLine(string.Format("  {0,7} | {1}", "Guesses", "Name"));
+                string dashes = GenerateDashes(40);
+                sb.AppendLine(dashes);
                 foreach (var currentPlayerInfo in scoreHolder)
                 {
-                    Console.WriteLine("{0}| {1}",
-                                      currentPosition, currentPlayerInfo);
-                    PrintLine(40);
+                    sb.AppendLine(string.Format("{0}| {1}", currentPosition, currentPlayerInfo));
+                    dashes = GenerateDashes(40);
+                    sb.AppendLine(dashes);
                     currentPosition++;
                 }
-                Console.WriteLine();
+
+                sb.AppendLine();
             }
             else
             {
-                Console.WriteLine("Scoreboard is empty!");
+                sb.AppendLine("Scoreboard is empty!");
             }
+            
+            return sb.ToString();
         }
 
-        public static void AddPlayer(int guesses)
+        /// <summary>
+        /// Add new player to the scoreboard 
+        /// </summary>
+        /// <param name="guesses">The amount of guesses it took him</param>
+        private static void AddPlayer(int guesses)
         {
             Console.WriteLine("You can add your nickname to top scores!");
-            string playerNick = String.Empty;
-            while (playerNick == String.Empty)
+            string playerNick = Console.ReadLine();
+            while (playerNick == string.Empty)
+            {
                 try
                 {
                     Console.Write("Enter your nickname: ");
                     playerNick = Console.ReadLine();
-                    PlayerInfo newPlayer = new PlayerInfo(playerNick, guesses);
-                    scoreHolder.Add(newPlayer);
+                    AddPlayerToScoreHolder(guesses, playerNick);
                 }
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                     continue;
                 }
+            }
         }
 
-
-
-        private static void PrintLine(int dashesForPrint)
+        /// <summary>
+        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
+        /// </summary>
+        /// <param name="guesses">How many guesses it took to the player</param>
+        /// <param name="nickName">The players nickname</param>
+        private static void AddPlayerToScoreHolder(int guesses, string nickName)
         {
+            PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
+            scoreHolder.Add(newPlayer);
+        }
+
+        /// <summary>
+        /// Generates dashes to be printed as a separator
+        /// </summary>
+        /// <param name="dashesForPrint">Amount of dashes to print</param>
+        /// <returns>The dashes to be printed</returns>
+        private static string GenerateDashes(int dashesForPrint)
+        {
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < dashesForPrint; i++)
             {
-                Console.Write("-");
+                sb.AppendLine("-");
             }
-            Console.WriteLine();
-        }
 
+            sb.AppendLine();
+            return sb.ToString();
+        }
     }
 }

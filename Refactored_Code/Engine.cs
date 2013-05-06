@@ -58,7 +58,7 @@ namespace BullsAndCows
             }
 
             HallOfFame.AddPlayerToScoreboard(numberOfMoves, numberOfCheats);
-            HallOfFame.PrintScoreboard();
+            HallOfFame.PrintScoreBoard();
             CreateNewGame();
         }
 
@@ -104,7 +104,7 @@ namespace BullsAndCows
             switch (command.ToLower())                                                           
             {                                                                                    
                 case "top":                                                                      
-                    HallOfFame.PrintScoreboard();                                                
+                    HallOfFame.PrintScoreBoard();                                                
                     break;                                                                       
                 case "help":                                                                     
                     RevealDigit();                                                                                                                             

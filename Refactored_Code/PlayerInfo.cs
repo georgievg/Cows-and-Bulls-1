@@ -2,33 +2,41 @@
 
 namespace BullsAndCows
 {
+   
+    /// <summary>
+    /// Class holding the info about a player as nickName and amount of guesses
+    /// </summary>
     public class PlayerInfo : IComparable<PlayerInfo>
     {
         private string nickName;
+
+        public int Guesses { get; set; }
 
         public string NickName
         {
             get
             {
-
-
-                return nickName;
+                return this.nickName;
             }
-            set
+
+            private set
             {
-                if (nickName == String.Empty)
+                if (string.IsNullOrEmpty(this.nickName))
                 {
                     throw new ArgumentException("NickName should have at least 1 symbol!");
                 }
                 else
                 {
-                    nickName = value;
+                    this.nickName = value;
                 }
             }
         }
 
-        public int Guesses { get; set; }
-
+        /// <summary>
+        /// Create new <see cref="PlayerInfo"/>
+        /// </summary>
+        /// <param name="nickName">The player's nickname</param>
+        /// <param name="guesses">The player's guesses</param>
         public PlayerInfo(string nickName, int guesses)
         {
             this.NickName = nickName;
@@ -49,7 +57,7 @@ namespace BullsAndCows
 
         public override string ToString()
         {
-            string result = String.Format("{0,3}    | {1}", Guesses, NickName);
+            string result = string.Format("{0,3}    | {1}", this.Guesses, this.NickName);
             return result;
         }
     }
