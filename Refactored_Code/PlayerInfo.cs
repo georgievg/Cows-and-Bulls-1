@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace BullsAndCows
-{
-   
+{   
     /// <summary>
     /// Class holding the info about a player as nickName and amount of guesses
     /// </summary>
@@ -21,7 +20,7 @@ namespace BullsAndCows
 
             private set
             {
-                if (string.IsNullOrEmpty(this.nickName))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("NickName should have at least 1 symbol!");
                 }

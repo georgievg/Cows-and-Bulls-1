@@ -15,6 +15,17 @@ namespace BullsAndCows
         private static List<PlayerInfo> scoreHolder;
 
         /// <summary>
+        /// Gets the List of all players
+        /// </summary>
+        public static int PlayersCount
+        {
+            get
+            {
+                return scoreHolder.Count;
+            }
+        }
+
+        /// <summary>
         /// Initializes static members of the <see cref="HallOfFame"/> class which holds <see cref="PlayerInfo"/>
         /// </summary>
         static HallOfFame()
@@ -23,11 +34,19 @@ namespace BullsAndCows
         }
 
         /// <summary>
+        /// Erases The Players From The ScoreBoard
+        /// </summary>
+        public static void EraseScoreBoard()
+        {
+            scoreHolder.Clear();
+        }
+        /// <summary>
         /// Adds player to the scoreboard
         /// </summary>
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
-        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats)
+        /// <param name="nickName"> The nickName of the player </param>
+        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats, string nickName)
         {
             if (numberOfCheats > 0)
             {
@@ -35,32 +54,41 @@ namespace BullsAndCows
             }
             else
             {
-                if (scoreHolder.Count < 5)
+                try
                 {
-                    AddPlayer(guesses);
+                    if (scoreHolder.Count < 5)
+                    {
+                        AddPlayerToScoreHolder(guesses, nickName);
+                    }
+                    else if (scoreHolder[4].Guesses > guesses)
+                    {
+                        scoreHolder.RemoveAt(4);
+                        AddPlayerToScoreHolder(guesses, nickName);
+                    }
                 }
-                else if (scoreHolder[4].Guesses > guesses)
+                catch (ArgumentException e)
                 {
-                    scoreHolder.RemoveAt(4);
-                    AddPlayer(guesses);
+                    Console.WriteLine(e.Message);
                 }
             }
         }
 
         /// <summary>
-        /// Prints the scoreboard of top players
+        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
         /// </summary>
-        public static void PrintScoreBoard()
+        /// <param name="guesses">How many guesses it took to the player</param>
+        /// <param name="nickName">The players nickname</param>
+        private static void AddPlayerToScoreHolder(int guesses, string nickName)
         {
-            string scoreBoard = GenerateScoreBoard();
-            Console.WriteLine(scoreBoard);
+            PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
+            scoreHolder.Add(newPlayer);
         }
 
         /// <summary>
         /// Generates the scoreboard of all players
         /// </summary>
         /// <returns>String of the generated scoreboard</returns>
-        private static string GenerateScoreBoard()
+        public static string GenerateScoreBoard()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
@@ -88,41 +116,6 @@ namespace BullsAndCows
             }
             
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// Add new player to the scoreboard 
-        /// </summary>
-        /// <param name="guesses">The amount of guesses it took him</param>
-        private static void AddPlayer(int guesses)
-        {
-            Console.WriteLine("You can add your nickname to top scores!");
-            string playerNick = Console.ReadLine();
-            while (playerNick == string.Empty)
-            {
-                try
-                {
-                    Console.Write("Enter your nickname: ");
-                    playerNick = Console.ReadLine();
-                    AddPlayerToScoreHolder(guesses, playerNick);
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                    continue;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
-        /// </summary>
-        /// <param name="guesses">How many guesses it took to the player</param>
-        /// <param name="nickName">The players nickname</param>
-        private static void AddPlayerToScoreHolder(int guesses, string nickName)
-        {
-            PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
-            scoreHolder.Add(newPlayer);
         }
 
         /// <summary>

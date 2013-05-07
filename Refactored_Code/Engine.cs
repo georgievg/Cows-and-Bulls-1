@@ -16,15 +16,6 @@ namespace BullsAndCows
         private char[] helpingNumber;
         private Random randomGenerator;
 
-
-
-
-        // Constructor
-        public Engine()
-        {
-
-        }
-
         // Methods
         private void Initialize()
         {
@@ -56,12 +47,24 @@ namespace BullsAndCows
                     CommandExecution(command);
                 
             }
-
-            HallOfFame.AddPlayerToScoreboard(numberOfMoves, numberOfCheats);
-            HallOfFame.PrintScoreBoard();
+            string nickName = ReadNickName();
+            HallOfFame.AddPlayerToScoreboard(numberOfMoves, numberOfCheats,nickName);
+            string scoreBoard = HallOfFame.GenerateScoreBoard();
+            Console.WriteLine(scoreBoard);
             CreateNewGame();
         }
 
+        private string ReadNickName()
+        {
+            Console.WriteLine("You can add your nickname to top scores!");
+            string playerNick = Console.ReadLine();
+            while (playerNick == string.Empty)
+            {
+                return playerNick;
+            }
+            return string.Empty;
+
+        }
 
         private void GenerateNumberForGuess()
         {
@@ -103,8 +106,9 @@ namespace BullsAndCows
         {                                                                                        
             switch (command.ToLower())                                                           
             {                                                                                    
-                case "top":                                                                      
-                    HallOfFame.PrintScoreBoard();                                                
+                case "top":
+                    string scoreBoard = HallOfFame.GenerateScoreBoard();
+                    Console.WriteLine(scoreBoard);                            
                     break;                                                                       
                 case "help":                                                                     
                     RevealDigit();                                                                                                                             
