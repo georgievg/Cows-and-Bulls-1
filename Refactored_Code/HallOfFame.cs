@@ -14,6 +14,8 @@ namespace BullsAndCows
         /// </summary>
         private static List<PlayerInfo> scoreHolder;
 
+        private static string nickName;
+
         /// <summary>
         /// Gets the List of all players
         /// </summary>
@@ -30,6 +32,7 @@ namespace BullsAndCows
         /// </summary>
         static HallOfFame()
         {
+            nickName = null;
             scoreHolder = new List<PlayerInfo>();
         }
 
@@ -40,13 +43,32 @@ namespace BullsAndCows
         {
             scoreHolder.Clear();
         }
+
+        /// <summary>
+        /// Validates the nick name for the user.
+        /// </summary>
+        /// <returns>Validated nick name.</returns>
+        public static string ValidateNickName()
+        {
+            Console.WriteLine("You can add your nickname to top scores!");
+
+            string playerNick = Console.ReadLine();
+
+            while (playerNick == string.Empty)
+            {
+                playerNick = Console.ReadLine();
+            }
+
+            return playerNick;
+        }
+
         /// <summary>
         /// Adds player to the scoreboard
         /// </summary>
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
         /// <param name="nickName"> The nickName of the player </param>
-        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats, string nickName)
+        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats)
         {
             if (numberOfCheats > 0)
             {
@@ -54,6 +76,8 @@ namespace BullsAndCows
             }
             else
             {
+                nickName = HallOfFame.ValidateNickName();
+
                 try
                 {
                     if (scoreHolder.Count < 5)
@@ -95,6 +119,7 @@ namespace BullsAndCows
             if (scoreHolder.Count > 0)
             {
                 sb.AppendLine("Scoreboard:");
+                sb.AppendLine();
                 scoreHolder.Sort();
                 int currentPosition = 1;
                 sb.AppendLine(string.Format("  {0,7} | {1}", "Guesses", "Name"));
@@ -114,7 +139,7 @@ namespace BullsAndCows
             {
                 sb.AppendLine("Scoreboard is empty!");
             }
-            
+
             return sb.ToString();
         }
 
@@ -128,7 +153,7 @@ namespace BullsAndCows
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < dashesForPrint; i++)
             {
-                sb.AppendLine("-");
+                sb.Append("-");
             }
 
             sb.AppendLine();
