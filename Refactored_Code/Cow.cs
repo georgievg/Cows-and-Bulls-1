@@ -5,51 +5,70 @@ using System.Text;
 
 namespace BullsAndCows
 {
-    public class Cow
+    public class Cow : IDraw
     {
-       // constructor
+        // constructor
         string numberForGuessString;
 
-        public Cow(string numberForGues)
+        string tryNumberString;
+
+        public Cow(string numberForGues, string tryNumberString)
         {
             this.numberForGuessString = numberForGues;
+            this.tryNumberString = tryNumberString;
         }
 
 
         // Methods
-        public int CountCows(
-            string tryNumberString, bool[] bulls, bool[] cows)
+
+        public void DrawToConsole()
         {
-            int cowsCount = 0;
-            for (int i = 0; i < tryNumberString.Length; i++)
-            {
-                int digitForTry = int.Parse(tryNumberString[i].ToString());
-                if (!bulls[i] && !cows[digitForTry])
-                {
-                    cows[digitForTry] = true;
-                    cowsCount =
-                    CountCowsForCurrentDigit(
-                        tryNumberString, cowsCount, bulls, i);
-                }
-            }
-            return cowsCount;
+            Console.Write(this.ToString());
         }
 
-        private int CountCowsForCurrentDigit(
-            string tryNumberString, int cowsCount, bool[] bulls, int i)
+        public override string ToString()
         {
-            for (int j = 0; j < tryNumberString.Length; j++)
+            return String.Format("Cows: {0}", this.CountCows());
+        }
+
+        public int CountCows()
+        {
+            bool[] cows = new bool[4];
+            int cowsCount = 0;
+            int notAllowed = 0;
+
+            for (int z = 0; z < tryNumberString.Length; z++)
             {
-                if (tryNumberString[i] == numberForGuessString[j])
+                for (int indexOfBull = notAllowed; indexOfBull < tryNumberString.Length; indexOfBull++)
                 {
-                    if (!bulls[j])
+                    if (tryNumberString[indexOfBull] == numberForGuessString[indexOfBull])
                     {
-                        cowsCount++;
+                        notAllowed = indexOfBull;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < tryNumberString.Length; i++)
+                {
+
+                    if (!cows[i] && !(tryNumberString[i] == numberForGuessString[i]))
+                    {
+
+                        if (tryNumberString[z] == numberForGuessString[i])
+                        {
+                            if (i == notAllowed)
+                            {
+                                cowsCount--;
+                            }
+                            cows[i] = true;
+                            cowsCount++;
+                            break;
+                        }
                     }
                 }
             }
+
             return cowsCount;
         }
-
     }
 }
