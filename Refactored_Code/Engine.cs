@@ -55,7 +55,7 @@ namespace BullsAndCows
             CommandParser consoleReader = new CommandParser();
             UserInterface.PrintGameRulesMessage();
             this.Initialize();
-            
+
             string command = null;
 
             while (!this.isGuessed)
@@ -91,15 +91,15 @@ namespace BullsAndCows
                 this.helpingNumber[helpingNumberIndex] = Engine.HIDING_SYMBOL;
             }
         }
-       
+
         /// <summary>
         /// Generate a secret number for the user to guess in the range of 1000 - 9999.
         /// </summary>
         private void GenerateNumberForGuess()
         {
-            Random randomGenerator = new Random();
+            Random randomSecretNumberGenerator = new Random();
 
-            this.numberToGuess = "9999";
+            this.numberToGuess = "7725"; //randomSecretNumberGenerator.Next(1000, 9999).ToString();
         }
 
         /// <summary>
@@ -116,7 +116,11 @@ namespace BullsAndCows
             }
             else
             {
-                this.PrintBullsAndCows(numberToTry);
+                Cow cow = new Cow(this.numberToGuess, numberToTry);
+                Bull bull = new Bull(this.numberToGuess, numberToTry);
+
+                bull.DrawToConsole();
+                cow.DrawToConsole();
             }
         }
 
@@ -170,7 +174,7 @@ namespace BullsAndCows
         private bool IsEqualToNumberForGuess(string numberToTry)
         {
             bool isEqualToNumberForGuess = (numberToTry == this.numberToGuess);
-            
+
             return isEqualToNumberForGuess;
         }
 
@@ -184,8 +188,8 @@ namespace BullsAndCows
 
             while (flag)
             {
-                Random randomGenerator = new Random();
-                int digitForReveal = randomGenerator.Next(0, 4);
+                Random randomIndexGenerator = new Random();
+                int digitForReveal = randomIndexGenerator.Next(0, 4);
 
                 if (this.helpingNumber[digitForReveal] == Engine.HIDING_SYMBOL)
                 {
@@ -204,31 +208,13 @@ namespace BullsAndCows
         private void PrintHelpingNumber()
         {
             Console.Write("The number looks like ");
-            foreach (char ch in this.helpingNumber) 
-            { 
+            foreach (char ch in this.helpingNumber)
+            {
                 Console.Write(ch);
             }
 
             Console.Write(".");
             Console.WriteLine();
-        }
-
-        /// <summary>
-        /// Print on the console the current number of 'bulls' and 'cows'.
-        /// </summary>
-        /// <param name="numberToTry">Number representing try of the user to guess the secret number.</param>
-        private void PrintBullsAndCows(string numberToTry)
-        {
-            Cow cow = new Cow(this.numberToGuess);
-            Bull bull = new Bull(this.numberToGuess);
-
-            bool[] bulls = new bool[4];
-            bool[] cows = new bool[10];
-
-            int bullsCount = bull.CountBulls(numberToTry, bulls);
-            int cowsCount = cow.CountCows(numberToTry, bulls, cows);
-
-            Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}!", bullsCount, cowsCount);
         }
     }
 }
