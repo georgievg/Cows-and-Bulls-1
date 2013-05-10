@@ -99,7 +99,7 @@ namespace BullsAndCows
         {
             Random randomSecretNumberGenerator = new Random();
 
-            this.numberToGuess = "7725"; //randomSecretNumberGenerator.Next(1000, 9999).ToString();
+            this.numberToGuess = randomSecretNumberGenerator.Next(1000, 9999).ToString();
         }
 
         /// <summary>
@@ -119,6 +119,7 @@ namespace BullsAndCows
                 Cow cow = new Cow(this.numberToGuess, numberToTry);
                 Bull bull = new Bull(this.numberToGuess, numberToTry);
 
+                Console.WriteLine("Wrong number! ");
                 bull.DrawToConsole();
                 cow.DrawToConsole();
             }
