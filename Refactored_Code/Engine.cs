@@ -98,8 +98,14 @@ namespace BullsAndCows
         private void GenerateNumberForGuess()
         {
             Random randomSecretNumberGenerator = new Random();
+            StringBuilder fourDigitNumber = new StringBuilder();
 
-            this.numberToGuess = randomSecretNumberGenerator.Next(1000, 9999).ToString();
+            for (int numberCount = 0; numberCount < 4; numberCount++)
+            {
+                fourDigitNumber.Append(randomSecretNumberGenerator.Next(0, 9));
+            }
+
+            this.numberToGuess = fourDigitNumber.ToString();
         }
 
         /// <summary>
@@ -119,7 +125,7 @@ namespace BullsAndCows
                 Cow cow = new Cow(this.numberToGuess, numberToTry);
                 Bull bull = new Bull(this.numberToGuess, numberToTry);
 
-                Console.WriteLine("Wrong number! ");
+                Console.Write("Wrong number! ");
                 bull.DrawToConsole();
                 cow.DrawToConsole();
             }
