@@ -39,20 +39,28 @@ namespace BullsAndCows
 
             for (int z = 0; z < tryNumberString.Length; z++)
             {
+                char symbol = '\0';
                 for (int i = 0; i < tryNumberString.Length; i++)
                 {
-
+                    if (tryNumberString[z] == numberForGuessString[i])
+                    {
+                        symbol = tryNumberString[z];
+                    }
                     if (!cows[i] && !(tryNumberString[i] == numberForGuessString[i]))
                     {
 
                         if (tryNumberString[z] == numberForGuessString[i])
                         {
-                           
+                            if (numberForGuessString[z] == symbol)
+                            {
+                                cowsCount--;
+                            }
                             cows[i] = true;
                             cowsCount++;
                             break;
                         }
                     }
+                    
                 }
             }
 
