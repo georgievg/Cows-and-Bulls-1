@@ -5,18 +5,27 @@ using System.Text;
 
 namespace BullsAndCows
 {
-    class Bull
+    class Bull : IDraw
     {
 
         string numberForGuessString;
+        //bool[] bulls = new bool[4];
+        string tryNumberString;
 
-        public Bull(string numberForGues)
+
+        public Bull(string numberForGuess, string tryNumberString)
         {
-            this.numberForGuessString = numberForGues;
+            this.numberForGuessString = numberForGuess;
+            this.tryNumberString = tryNumberString;
+            
         }
 
+        public void DrawToConsole()
+        {
+            Console.Write(this.ToString());
+        }
 
-        public int CountBulls(string tryNumberString, bool[] bulls)
+        private int CountBulls()
         {
             int bullsCount = 0;
             for (int i = 0; i < tryNumberString.Length; i++)
@@ -24,10 +33,15 @@ namespace BullsAndCows
                 if (tryNumberString[i] == numberForGuessString[i])
                 {
                     bullsCount++;
-                    bulls[i] = true;
+                    //bulls[i] = true;
                 }
             }
             return bullsCount;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Bulls: {0}",this.CountBulls());
         }
 
     }
