@@ -23,7 +23,7 @@ namespace BullsAndCows
 
         public void DrawToConsole()
         {
-            Console.Write(this.ToString());
+            Console.WriteLine(this.ToString());
         }
 
         public override string ToString()
@@ -35,19 +35,10 @@ namespace BullsAndCows
         {
             bool[] cows = new bool[4];
             int cowsCount = 0;
-            int notAllowed = 0;
+           
 
             for (int z = 0; z < tryNumberString.Length; z++)
             {
-                for (int indexOfBull = notAllowed; indexOfBull < tryNumberString.Length; indexOfBull++)
-                {
-                    if (tryNumberString[indexOfBull] == numberForGuessString[indexOfBull])
-                    {
-                        notAllowed = indexOfBull;
-                        break;
-                    }
-                }
-
                 for (int i = 0; i < tryNumberString.Length; i++)
                 {
 
@@ -56,10 +47,7 @@ namespace BullsAndCows
 
                         if (tryNumberString[z] == numberForGuessString[i])
                         {
-                            if (i == notAllowed)
-                            {
-                                cowsCount--;
-                            }
+                           
                             cows[i] = true;
                             cowsCount++;
                             break;
