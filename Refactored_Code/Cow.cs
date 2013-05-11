@@ -23,12 +23,7 @@ namespace BullsAndCows
 
         public void DrawToConsole()
         {
-            Console.WriteLine(this.ToString());
-        }
-
-        public override string ToString()
-        {
-            return String.Format("Cows: {0}", this.CountCows());
+            Console.WriteLine("Cows: {0}", this.CountCows());
         }
 
         public int CountCows()
