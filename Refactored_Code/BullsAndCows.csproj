@@ -48,7 +48,9 @@
     <Compile Include="BullsAndCows.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="HallOfFame.cs" />
+    <Compile Include="IDraw.cs" />
     <Compile Include="PlayerInfo.cs" />
+    <Compile Include="SecretNumber.cs" />
     <Compile Include="UserInterface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
