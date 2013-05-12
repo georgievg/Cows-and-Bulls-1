@@ -7,10 +7,15 @@ namespace BullsAndCows
 {
     public class Cow : IDraw
     {
-        // constructor
-        string numberForGuessString;
+        /// <summary>
+        /// Counts how many numbers are the same as the Guess Number
+        /// </summary>
+        /// <returns>
+        /// Prints the amount of found Cows
+        /// </returns>
+        private string numberForGuessString;
 
-        string tryNumberString;
+        private string tryNumberString;
 
         public Cow(string numberForGues, string tryNumberString)
         {
@@ -18,14 +23,13 @@ namespace BullsAndCows
             this.tryNumberString = tryNumberString;
         }
 
-
-        // Methods
-
         public void DrawToConsole()
         {
             Console.WriteLine("Cows: {0}", this.CountCows());
         }
-
+        /// <summary>
+        /// Counts the amount of Cows in the Guess Number
+        /// </summary>
         public int CountCows()
         {
             bool[] cows = new bool[4];

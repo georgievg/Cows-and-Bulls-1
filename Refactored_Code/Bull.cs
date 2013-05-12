@@ -7,24 +7,29 @@ namespace BullsAndCows
 {
     class Bull : IDraw
     {
-
-        string numberForGuessString;
+        /// <summary>
+        /// Counts how many numbers matchs in the same place with the Guess Number
+        /// </summary>
+        /// <returns>
+        /// Prints the amount of found Bulls
+        /// </returns>
+        private string numberForGuessString;
         //bool[] bulls = new bool[4];
-        string tryNumberString;
-
+        private string tryNumberString;
 
         public Bull(string numberForGuess, string tryNumberString)
         {
             this.numberForGuessString = numberForGuess;
-            this.tryNumberString = tryNumberString;
-            
+            this.tryNumberString = tryNumberString;   
         }
 
         public void DrawToConsole()
         {
             Console.Write("Bulls: {0} ", this.CountBulls());
         }
-
+        /// <summary>
+        /// Counts the amount of Bulls in the Guess Number
+        /// </summary>
         private int CountBulls()
         {
             int bullsCount = 0;

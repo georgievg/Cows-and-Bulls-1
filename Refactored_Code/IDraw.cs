@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BullsAndCows
 {
+    /// <summary>
+    /// Interface,that is inherited by Cow.cs and Bull.cs
+    /// </summary>
     public interface IDraw
     {
         void DrawToConsole();
