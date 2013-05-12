@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="CommandParser.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//-----------------------------------------------------------------------
 namespace BullsAndCows
 {
-    // This class should have some command parser logic
+    using System;
+    
+    /// <summary>
+    /// This class provides command parser logic
+    /// </summary>
     public class CommandParser
     {
         private string[] allowedCommands;
 
-        // construcotr
+        // construcotor
         public CommandParser()
         {
             this.allowedCommands = new string[] {
