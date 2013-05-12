@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="HallOfFame.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//-----------------------------------------------------------------------
 namespace BullsAndCows
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     /// <summary>
     /// Class holding the high scores
     /// </summary>
@@ -14,7 +19,19 @@ namespace BullsAndCows
         /// </summary>
         private static List<PlayerInfo> scoreHolder;
 
+        /// <summary>
+        /// Nickname of the player
+        /// </summary>
         private static string nickName;
+
+        /// <summary>
+        /// Initializes static members of the <see cref="HallOfFame"/> class which holds <see cref="PlayerInfo"/>
+        /// </summary>
+        static HallOfFame()
+        {
+            nickName = null;
+            scoreHolder = new List<PlayerInfo>();
+        }
 
         /// <summary>
         /// Gets the List of all players
@@ -25,15 +42,6 @@ namespace BullsAndCows
             {
                 return scoreHolder.Count;
             }
-        }
-
-        /// <summary>
-        /// Initializes static members of the <see cref="HallOfFame"/> class which holds <see cref="PlayerInfo"/>
-        /// </summary>
-        static HallOfFame()
-        {
-            nickName = null;
-            scoreHolder = new List<PlayerInfo>();
         }
 
         /// <summary>
@@ -67,7 +75,6 @@ namespace BullsAndCows
         /// </summary>
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
-        /// <param name="nickName"> The nickName of the player </param>
         public static void AddPlayerToScoreboard(int guesses, int numberOfCheats)
         {
             if (numberOfCheats > 0)
@@ -95,17 +102,6 @@ namespace BullsAndCows
                     Console.WriteLine(e.Message);
                 }
             }
-        }
-
-        /// <summary>
-        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
-        /// </summary>
-        /// <param name="guesses">How many guesses it took to the player</param>
-        /// <param name="nickName">The players nickname</param>
-        private static void AddPlayerToScoreHolder(int guesses, string nickName)
-        {
-            PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
-            scoreHolder.Add(newPlayer);
         }
 
         /// <summary>
@@ -141,6 +137,17 @@ namespace BullsAndCows
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
+        /// </summary>
+        /// <param name="guesses">How many guesses it took to the player</param>
+        /// <param name="nickName">The players nickname</param>
+        private static void AddPlayerToScoreHolder(int guesses, string nickName)
+        {
+            PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
+            scoreHolder.Add(newPlayer);
         }
 
         /// <summary>
