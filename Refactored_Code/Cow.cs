@@ -8,7 +8,7 @@ namespace BullsAndCows
     public class Cow : IDraw
     {
         /// <summary>
-        /// Counts how many numbers are the same as the Guess Number
+        /// Counts how many numbers are the same as the Secret Number
         /// </summary>
         /// <returns>
         /// Prints the amount of found Cows
@@ -28,7 +28,7 @@ namespace BullsAndCows
             Console.WriteLine("Cows: {0}", this.CountCows());
         }
         /// <summary>
-        /// Counts the amount of Cows in the Guess Number
+        /// Counts the amount of Cows in the Secret Number
         /// </summary>
         public int CountCows()
         {

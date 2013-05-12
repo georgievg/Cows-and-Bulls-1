@@ -8,7 +8,7 @@ namespace BullsAndCows
     class Bull : IDraw
     {
         /// <summary>
-        /// Counts how many numbers matchs in the same place with the Guess Number
+        /// Counts how many numbers matchs in the same place with the Secret Number
         /// </summary>
         /// <returns>
         /// Prints the amount of found Bulls
@@ -28,7 +28,7 @@ namespace BullsAndCows
             Console.Write("Bulls: {0} ", this.CountBulls());
         }
         /// <summary>
-        /// Counts the amount of Bulls in the Guess Number
+        /// Counts the amount of Bulls in the Secret Number
         /// </summary>
         private int CountBulls()
         {
