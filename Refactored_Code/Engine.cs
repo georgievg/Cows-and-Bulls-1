@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Engine.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace BullsAndCows
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Determine the logic and methods controlling the game flow.
     /// </summary>

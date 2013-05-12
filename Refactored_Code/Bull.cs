@@ -14,7 +14,7 @@ namespace BullsAndCows
         /// Prints the amount of found Bulls
         /// </returns>
         private string numberForGuessString;
-        //bool[] bulls = new bool[4];
+        
         private string tryNumberString;
 
         public Bull(string numberForGuess, string tryNumberString)
