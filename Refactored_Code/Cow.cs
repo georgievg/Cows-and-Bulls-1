@@ -17,56 +17,57 @@ namespace BullsAndCows
         /// Prints the amount of found Cows
         /// </returns>
         private string numberForGuessString;
-
+        int cowsCount;
         private string tryNumberString;
+        bool[] isBull;
 
-        public Cow(string numberForGues, string tryNumberString)
+        public Cow(string numberForGuess, string tryNumberString, bool[] isBull)
         {
-            this.numberForGuessString = numberForGues;
+            this.numberForGuessString = numberForGuess;
             this.tryNumberString = tryNumberString;
+            this.isBull = isBull;
         }
 
         public void DrawToConsole()
         {
-            Console.WriteLine("Cows: {0}", this.CountCows());
+            Console.WriteLine("Cows: {0}", this.CountCows(tryNumberString));
         }
         /// <summary>
         /// Counts the amount of Cows in the Secret Number
         /// </summary>
-        public int CountCows()
+       
+        private  int CountCows(string tryNumberString)
+    {
+        bool[] cows = new bool[4];
+        for (int i = 0; i < tryNumberString.Length; i++)
         {
-            bool[] cows = new bool[4];
-            int cowsCount = 0;
-           
-
-            for (int z = 0; z < tryNumberString.Length; z++)
+            int digitForTry = int.Parse(tryNumberString[i].ToString());
+            if (!isBull[i])
             {
-                char symbol = '\0';
-                for (int i = 0; i < tryNumberString.Length; i++)
-                {
-                    if (tryNumberString[z] == numberForGuessString[i])
-                    {
-                        symbol = tryNumberString[z];
-                    }
-                    if (!cows[i] && !(tryNumberString[i] == numberForGuessString[i]))
-                    {
-
-                        if (tryNumberString[z] == numberForGuessString[i])
-                        {
-                            if (numberForGuessString[z] == symbol)
-                            {
-                                cowsCount--;
-                            }
-                            cows[i] = true;
-                            cowsCount++;
-                            break;
-                        }
-                    }
-                    
-                }
+                cowsCount =
+                CountCowsForCurrentDigit(
+                    tryNumberString, cowsCount, isBull, cows, i);
             }
-
+        }
             return cowsCount;
         }
+
+         private  int CountCowsForCurrentDigit(
+        string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int i)
+    {
+        for (int j = 0; j < tryNumberString.Length; j++)
+        {
+            if (tryNumberString[i] == numberForGuessString[j])
+            {
+                if (!bulls[j]&&!cows[j])
+                {
+                    cows[j] = true;
+                    cowsCount++;
+                    return cowsCount;
+                }
+            }
+        }
+        return cowsCount;
+    }
     }
 }

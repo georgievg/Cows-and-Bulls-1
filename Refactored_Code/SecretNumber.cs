@@ -15,7 +15,7 @@ namespace BullsAndCows
     /// Class generating 'secret number' and defining all logic connected to it.
     /// </summary>
     public class SecretNumber
-    {   
+    {
         /// <summary>
         /// Symbol representing starting state of the digits in <see cref="helpingNumber"/>.
         /// </summary>
@@ -35,6 +35,11 @@ namespace BullsAndCows
         /// Symbol used to hide the unrevealed digits of the secret number.
         /// </summary>
         private string numberToGuess;
+
+        /// <summary>
+        /// Random generator
+        /// </summary>
+        private Random randomNumberGenerator = new Random();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SecretNumber"/> class.
@@ -71,33 +76,11 @@ namespace BullsAndCows
         }
 
         /// <summary>
-        /// Reveals one digit from the secret number each time is invoked and print it on the Console.
-        ///     Never reveals already revealed digit.
-        /// </summary>
-        public void RevealDigit()
-        {
-            bool isRevealed = false;
-             
-            while (!isRevealed)
-            {
-                Random randomIndexGenerator = new Random();
-                int digitForReveal = randomIndexGenerator.Next(0, SecretNumber.SecretNumberLenght);
-
-                if (this.helpingNumber[digitForReveal] == SecretNumber.HidingSymbol)
-                {
-                    this.helpingNumber[digitForReveal] = this.numberToGuess[digitForReveal];
-                    isRevealed = true;
-                }
-            }
-
-            this.PrintHelpingNumber();
-        }
-
-        /// <summary>
         /// Used in the <see cref="PrintHelpingNumber()"/> to print on the Console all numbers revealed by the command 'help'. 
         /// </summary>
-        private void PrintHelpingNumber()
+        public void PrintHelpingNumber()
         {
+            this.RevealDigit();
             Console.Write("The number looks like ");
             foreach (char ch in this.helpingNumber)
             {
@@ -109,16 +92,35 @@ namespace BullsAndCows
         }
 
         /// <summary>
+        /// Reveals one digit from the secret number each time is invoked and print it on the Console.
+        /// Never reveals already revealed digit.
+        /// </summary>
+        private void RevealDigit()
+        {
+            bool isRevealed = false;
+
+            while (!isRevealed)
+            {
+                int digitForReveal = randomNumberGenerator.Next(0, SecretNumber.SecretNumberLenght);
+
+                if (this.helpingNumber[digitForReveal] == SecretNumber.HidingSymbol)
+                {
+                    this.helpingNumber[digitForReveal] = this.numberToGuess[digitForReveal];
+                    isRevealed = true;
+                }
+            }
+        }
+
+        /// <summary>
         /// Generate a secret number for the user to guess in the range of 0000 - 9999.
         /// </summary>
         private void GenerateNumberForGuess()
         {
-            Random randomSecretNumberGenerator = new Random();
             StringBuilder fourDigitNumber = new StringBuilder();
 
             for (int numberCount = 0; numberCount < SecretNumber.SecretNumberLenght; numberCount++)
             {
-                fourDigitNumber.Append(randomSecretNumberGenerator.Next(0, 9));
+                fourDigitNumber.Append(this.randomNumberGenerator.Next(0, 9));
             }
 
             this.numberToGuess = fourDigitNumber.ToString();

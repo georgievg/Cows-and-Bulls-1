@@ -22,7 +22,7 @@ namespace BullsAndCows
           "Please try to guess my secret 4-digit number." + Environment.NewLine +
           "Use 'top' to view the top scoreboard." + Environment.NewLine +
           "'Restart' to start a new game." + Environment.NewLine +
-          "'Help' to cheat." + Environment.NewLine,
+          "'Help' to cheat." + Environment.NewLine +
           "'Exit' to quit the game." + Environment.NewLine);
         }
 

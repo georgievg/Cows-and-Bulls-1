@@ -66,7 +66,7 @@ public class cows_buls
     private static void GenerateNumberForGuess()
     {
         long numberForGuess = randomGenerator.Next(0, 9999);
-        numberForGuessString = numberForGuess.ToString();
+        numberForGuessString = "8130"; // numberForGuess.ToString();
         AddZeroes();
     }
 
@@ -121,26 +121,26 @@ public class cows_buls
         string tryNumberString, ref int bullsCount, ref int cowsCount)
     {
         bool[] bulls = new bool[4];
-        bool[] cows = new bool[10];
+       
 
 
 
         bullsCount = CountBulls(tryNumberString, bullsCount, bulls);
-        cowsCount = CountCows(tryNumberString, cowsCount, bulls, cows);
+        cowsCount = CountCows(tryNumberString, cowsCount, bulls);
     }
 
     private static int CountCows(
-        string tryNumberString, int cowsCount, bool[] bulls, bool[] cows)
+        string tryNumberString, int cowsCount, bool[] bulls)
     {
+        bool[] cows = new bool[4];
         for (int i = 0; i < tryNumberString.Length; i++)
         {
             int digitForTry = int.Parse(tryNumberString[i].ToString());
-            if (!bulls[i] && !cows[digitForTry])
+            if (!bulls[i])
             {
-                cows[digitForTry] = true;
                 cowsCount =
                 CountCowsForCurrentDigit(
-                    tryNumberString, cowsCount, bulls, i);
+                    tryNumberString, cowsCount, bulls, cows, i);
             }
         }
         return cowsCount;
@@ -159,15 +159,17 @@ public class cows_buls
         return bullsCount;
     }
     private static int CountCowsForCurrentDigit(
-        string tryNumberString, int cowsCount, bool[] bulls, int i)
+        string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int i)
     {
         for (int j = 0; j < tryNumberString.Length; j++)
         {
             if (tryNumberString[i] == numberForGuessString[j])
             {
-                if (!bulls[j])
+                if (!bulls[j]&&!cows[j])
                 {
+                    cows[j] = true;
                     cowsCount++;
+                    return cowsCount;
                 }
             }
         }

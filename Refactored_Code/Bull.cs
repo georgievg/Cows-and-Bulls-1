@@ -17,13 +17,14 @@ namespace BullsAndCows
         /// Prints the amount of found Bulls
         /// </returns>
         private string numberForGuessString;
-        
+        private bool[] isBull;
         private string tryNumberString;
 
-        public Bull(string numberForGuess, string tryNumberString)
+        public Bull(string numberForGuess, string tryNumberString, bool[] isBull)
         {
             this.numberForGuessString = numberForGuess;
-            this.tryNumberString = tryNumberString;   
+            this.tryNumberString = tryNumberString;
+            this.isBull = isBull;
         }
 
         public void DrawToConsole()
@@ -41,7 +42,7 @@ namespace BullsAndCows
                 if (tryNumberString[i] == numberForGuessString[i])
                 {
                     bullsCount++;
-                    //bulls[i] = true;
+                    isBull[i] = true;
                 }
             }
             return bullsCount;

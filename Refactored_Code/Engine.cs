@@ -102,8 +102,10 @@ namespace BullsAndCows
             }
             else
             {
-                Cow cow = new Cow(this.numberToGuess.Value, numberToTry);
-                Bull bull = new Bull(this.numberToGuess.Value, numberToTry);
+                bool[] isBull = new bool[4];
+                Bull bull = new Bull(this.numberToGuess.Value, numberToTry, isBull);
+                Cow cow = new Cow(this.numberToGuess.Value, numberToTry,isBull);
+                
 
                 Console.Write("Wrong number! ");
                 bull.DrawToConsole();
@@ -124,7 +126,7 @@ namespace BullsAndCows
                     Console.WriteLine(scoreBoard);
                     break;
                 case "help":
-                    this.numberToGuess.RevealDigit();
+                    this.numberToGuess.PrintHelpingNumber();
                     this.numberOfCheats++;
                     break;
                 case "restart":
