@@ -77,7 +77,7 @@ namespace BullsAndCows
         public void RevealDigit()
         {
             bool isRevealed = false;
-
+             
             while (!isRevealed)
             {
                 Random randomIndexGenerator = new Random();
