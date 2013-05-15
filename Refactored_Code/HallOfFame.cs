@@ -56,6 +56,7 @@ namespace BullsAndCows
         /// </summary>
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
+        /// <param name="nick">The nickName of the player to be added</param>
         public static void AddPlayerToScoreboard(int guesses, int numberOfCheats,string nick)
         {
             ValidateNickName(nick);

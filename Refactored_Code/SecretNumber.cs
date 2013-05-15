@@ -59,17 +59,20 @@ namespace BullsAndCows
         /// <summary>
         /// Used in the <see cref="PrintHelpingNumber()"/> to print on the Console all numbers revealed by the command 'help'. 
         /// </summary>
-        public void PrintHelpingNumber()
+        public string GetHelpingNumber()
         {
             this.RevealDigit();
-            Console.Write("The number looks like ");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("The number looks like ");
             foreach (char ch in this.helpingNumber)
             {
-                Console.Write(ch);
+                sb.Append(ch);
             }
 
-            Console.Write(".");
-            Console.WriteLine();
+            sb.Append(".");
+            sb.AppendLine();
+
+            return sb.ToString();
         }
 
         private void RevealDigit()

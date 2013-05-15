@@ -94,6 +94,12 @@ namespace BullsAndCows
             }
         }
 
+        private void PrintHelpingNumber()
+        {
+            string helpingNumber = this.numberToGuess.GetHelpingNumber();
+            Console.WriteLine(helpingNumber);
+        }
+
         private void CommandExecution(string command)
         {
             switch (command.ToLower())
@@ -103,7 +109,7 @@ namespace BullsAndCows
                     Console.WriteLine(scoreBoard);
                     break;
                 case "help":
-                    this.numberToGuess.PrintHelpingNumber();
+                    PrintHelpingNumber();
                     this.numberOfCheats++;
                     break;
                 case "restart":
