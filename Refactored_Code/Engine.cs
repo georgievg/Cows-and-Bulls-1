@@ -37,12 +37,27 @@ namespace BullsAndCows
                 this.CommandExecution(command);
             }
 
-            HallOfFame.AddPlayerToScoreboard(this.numberOfMoves, this.numberOfCheats);
+            string nickName = ReadNickName();
+            HallOfFame.AddPlayerToScoreboard(this.numberOfMoves, this.numberOfCheats, nickName);
 
             string scoreBoard = HallOfFame.GenerateScoreBoard();
             Console.WriteLine(scoreBoard);
 
             this.CreateNewGame();
+        }
+
+        private string ReadNickName()
+        {
+            Console.WriteLine("You can add your nickname to top scores!");
+
+            string playerNick = Console.ReadLine();
+
+            while (playerNick == string.Empty)
+            {
+                playerNick = Console.ReadLine();
+            }
+
+            return playerNick;
         }
 
         private void Initialize()

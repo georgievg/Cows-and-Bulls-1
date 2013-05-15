@@ -16,15 +16,15 @@ namespace BullsAndCowsTests
             Assert.AreEqual(expected, actual);
         }
 
-        //[TestMethod]
-        //public void OnePlayerScoresTest()
-        //{
-        //    HallOfFame.AddPlayerToScoreboard(5, 0);
-        //    int players = HallOfFame.PlayersCount;
-        //    var expected = 1;
-        //    var actual = players;
-        //    Assert.AreEqual(expected, actual);
-        //}
+        [TestMethod]
+        public void OnePlayerScoresTest()
+        {
+            HallOfFame.AddPlayerToScoreboard(5, 0, "pesho");
+            int players = HallOfFame.PlayersCount;
+            var expected = 1;
+            var actual = players;
+            Assert.AreEqual(expected, actual);
+        }
 
         [TestMethod]
         public void GenerateEmptyScoreboard()

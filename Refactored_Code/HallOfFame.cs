@@ -16,14 +16,11 @@ namespace BullsAndCows
     {
         private static List<PlayerInfo> scoreHolder;
 
-        private static string nickName;
-
         /// <summary>
         /// Initializes static members of the <see cref="HallOfFame"/> class which holds <see cref="PlayerInfo"/>
         /// </summary>
         static HallOfFame()
         {
-            nickName = null;
             scoreHolder = new List<PlayerInfo>();
         }
 
@@ -46,22 +43,12 @@ namespace BullsAndCows
             scoreHolder.Clear();
         }
 
-        /// <summary>
-        /// Validates the nick name for the user.
-        /// </summary>
-        /// <returns>Validated nick name.</returns>
-        public static string ValidateNickName()
+        private static void ValidateNickName(string nickName)
         {
-            Console.WriteLine("You can add your nickname to top scores!");
-
-            string playerNick = Console.ReadLine();
-
-            while (playerNick == string.Empty)
+            if (string.IsNullOrEmpty(nickName))
             {
-                playerNick = Console.ReadLine();
-            }
-
-            return playerNick;
+                throw new NullReferenceException("NickName can not be empty");
+            }            
         }
 
         /// <summary>
@@ -69,26 +56,25 @@ namespace BullsAndCows
         /// </summary>
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
-        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats)
+        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats,string nick)
         {
+            ValidateNickName(nick);
             if (numberOfCheats > 0)
             {
                 UserInterface.PrintCheaterMessage();
-            }
+            }            
             else
             {
-                nickName = HallOfFame.ValidateNickName();
-
                 try
                 {
                     if (scoreHolder.Count < 5)
                     {
-                        AddPlayerToScoreHolder(guesses, nickName);
+                        AddPlayerToScoreHolder(guesses, nick);
                     }
                     else if (scoreHolder[4].Guesses > guesses)
                     {
                         scoreHolder.RemoveAt(4);
-                        AddPlayerToScoreHolder(guesses, nickName);
+                        AddPlayerToScoreHolder(guesses, nick);
                     }
                 }
                 catch (ArgumentException e)
@@ -133,11 +119,6 @@ namespace BullsAndCows
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Add an instance of <see cref="PlayerInfo"/> to the scoreHolder
-        /// </summary>
-        /// <param name="guesses">How many guesses it took to the player</param>
-        /// <param name="nickName">The players nickname</param>
         private static void AddPlayerToScoreHolder(int guesses, string nickName)
         {
             PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
