@@ -12,9 +12,6 @@ namespace BullsAndCows
     /// </summary>
     public class CommandParser
     {
-        /// <summary>
-        /// Array of the allowed commands that can be used in the game
-        /// </summary>
         private string[] allowedCommands;
 
         /// <summary>
