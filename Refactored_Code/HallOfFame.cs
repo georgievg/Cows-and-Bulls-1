@@ -14,14 +14,8 @@ namespace BullsAndCows
     /// </summary>
     public static class HallOfFame
     {
-        /// <summary>
-        /// List of all <see cref="PlayerInfo"/> instances
-        /// </summary>
         private static List<PlayerInfo> scoreHolder;
 
-        /// <summary>
-        /// Nickname of the player
-        /// </summary>
         private static string nickName;
 
         /// <summary>

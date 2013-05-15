@@ -10,12 +10,6 @@ namespace BullsAndCows
 
     class Bull : IDraw
     {
-        /// <summary>
-        /// Counts how many numbers matchs in the same place with the Secret Number
-        /// </summary>
-        /// <returns>
-        /// Prints the amount of found Bulls
-        /// </returns>
         private string numberForGuessString;
         private bool[] isBull;
         private string tryNumberString;
@@ -27,13 +21,14 @@ namespace BullsAndCows
             this.isBull = isBull;
         }
 
+        /// <summary>
+        /// Draws all the bulls to the console
+        /// </summary>
         public void DrawToConsole()
         {
             Console.Write("Bulls: {0} ", this.CountBulls());
         }
-        /// <summary>
-        /// Counts the amount of Bulls in the Secret Number
-        /// </summary>
+
         private int CountBulls()
         {
             int bullsCount = 0;

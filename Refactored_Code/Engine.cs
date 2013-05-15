@@ -7,33 +7,19 @@
 namespace BullsAndCows
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// Determine the logic and methods controlling the game flow.
     /// </summary>
     public class Engine
     {
-        /// <summary>
-        /// Number representing the count of moves that are cheats.
-        /// </summary>
         private int numberOfCheats;
 
-        /// <summary>
-        /// Number representing the count of moves that player has done(not including cheat moves).
-        /// </summary>
         private int numberOfMoves;
 
-        /// <summary>
-        /// The secret number of the game. Variable representing four random digits in the range of 0000 - 9999.
-        /// </summary>
         private SecretNumber numberToGuess;
 
-        /// <summary>
-        /// Keeps true or false value depending from the game current state or more specific is the secret number is already guessed.
-        /// </summary>
         private bool isGuessed;
 
         /// <summary>
