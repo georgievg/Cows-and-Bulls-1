@@ -13,7 +13,7 @@ namespace BullsAndCows
     public class PlayerInfo : IComparable<PlayerInfo>
     {
         private string nickName;
-
+        private int guesses;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerInfo" /> class.
         /// </summary>
@@ -51,7 +51,21 @@ namespace BullsAndCows
         /// <summary>
         /// Gets or sets the player's guesses
         /// </summary>
-        public int Guesses { get; set; }
+        public int Guesses
+        {
+            get
+            {
+                return this.guesses;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new IndexOutOfRangeException("The amount of guesses can not be less than zero");
+                }
+                this.guesses = value;
+            }
+        }
 
         /// <summary>
         /// Compares the number of guesses made by two users
