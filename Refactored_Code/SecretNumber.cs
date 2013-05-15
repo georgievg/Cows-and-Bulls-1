@@ -16,29 +16,10 @@ namespace BullsAndCows
     /// </summary>
     public class SecretNumber
     {
-        /// <summary>
-        /// Symbol representing starting state of the digits in <see cref="helpingNumber"/>.
-        /// </summary>
         private const char HidingSymbol = 'X';
-
-        /// <summary>
-        /// Number of the digits for the secret number.
-        /// </summary>
         private const int SecretNumberLenght = 4;
-
-        /// <summary>
-        /// Container for hiding  partially the secret number from the user when use 'help' command, depending of how many times is used the command.
-        /// </summary>
         private char[] helpingNumber;
-
-        /// <summary>
-        /// Symbol used to hide the unrevealed digits of the secret number.
-        /// </summary>
         private string numberToGuess;
-
-        /// <summary>
-        /// Random generator
-        /// </summary>
         private Random randomNumberGenerator = new Random();
 
         /// <summary>
@@ -91,10 +72,6 @@ namespace BullsAndCows
             Console.WriteLine();
         }
 
-        /// <summary>
-        /// Reveals one digit from the secret number each time is invoked and print it on the Console.
-        /// Never reveals already revealed digit.
-        /// </summary>
         private void RevealDigit()
         {
             bool isRevealed = false;
@@ -111,9 +88,6 @@ namespace BullsAndCows
             }
         }
 
-        /// <summary>
-        /// Generate a secret number for the user to guess in the range of 0000 - 9999.
-        /// </summary>
         private void GenerateNumberForGuess()
         {
             StringBuilder fourDigitNumber = new StringBuilder();
@@ -126,9 +100,6 @@ namespace BullsAndCows
             this.numberToGuess = fourDigitNumber.ToString();
         }
 
-        /// <summary>
-        /// Initialize <see cref="helpingNumber"/> with hiding symbol <see cref="HidingSymbol"/>.
-        /// </summary>
         private void GenerateHelpingNumber()
         {
             for (int helpingNumberIndex = 0; helpingNumberIndex < this.helpingNumber.Length; helpingNumberIndex++)
