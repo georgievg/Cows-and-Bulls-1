@@ -22,11 +22,12 @@ namespace BullsAndCows
         }
 
         /// <summary>
-        /// Draws all the bulls to the console
+        /// Gets the count of the Bulls
         /// </summary>
-        public void DrawToConsole()
+        /// <returns>Formatted string</returns>
+        public string GetPrintableCount()
         {
-            Console.Write("Bulls: {0} ", this.CountBulls());
+            return string.Format("Bulls: {0} ", this.CountBulls());
         }
 
         private int CountBulls()

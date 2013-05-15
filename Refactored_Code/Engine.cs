@@ -89,8 +89,10 @@ namespace BullsAndCows
                 
 
                 Console.Write("Wrong number! ");
-                bull.DrawToConsole();
-                cow.DrawToConsole();
+                string bullCount = bull.GetPrintableCount();
+                Console.WriteLine(bullCount);
+                string cowCount = cow.GetPrintableCount();
+                Console.WriteLine(cowCount);
             }
         }
 

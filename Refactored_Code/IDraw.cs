@@ -13,8 +13,9 @@ namespace BullsAndCows
     public interface IDraw
     {
         /// <summary>
-        /// Shows information on the console
+        /// Gets the count of the Bulls/Cows
         /// </summary>
-        void DrawToConsole();
+        /// <returns>Formatted string</returns>
+        string GetPrintableCount();
     }
 }

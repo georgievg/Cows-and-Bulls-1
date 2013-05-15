@@ -17,9 +17,9 @@ namespace BullsAndCows
         /// Prints the amount of found Cows
         /// </returns>
         private string numberForGuessString;
-        int cowsCount;
+        private int cowsCount;
         private string tryNumberString;
-        bool[] isBull;
+        private bool[] isBull;
 
         public Cow(string numberForGuess, string tryNumberString, bool[] isBull)
         {
@@ -28,46 +28,49 @@ namespace BullsAndCows
             this.isBull = isBull;
         }
 
-        public void DrawToConsole()
+        /// <summary>
+        /// Gets the count of the Bulls
+        /// </summary>
+        /// <returns>Formatted string</returns>
+        public string GetPrintableCount()
         {
-            Console.WriteLine("Cows: {0}", this.CountCows(tryNumberString));
+            return string.Format("Cows: {0}", this.CountCows());
         }
+
         /// <summary>
         /// Counts the amount of Cows in the Secret Number
         /// </summary>
        
-        private  int CountCows(string tryNumberString)
-    {
-        bool[] cows = new bool[4];
-        for (int i = 0; i < tryNumberString.Length; i++)
+        private int CountCows()
         {
-            int digitForTry = int.Parse(tryNumberString[i].ToString());
-            if (!isBull[i])
+            bool[] cows = new bool[4];
+            for (int i = 0; i < tryNumberString.Length; i++)
             {
-                cowsCount =
-                CountCowsForCurrentDigit(
-                    tryNumberString, cowsCount, isBull, cows, i);
+                //int digitForTry = int.Parse(tryNumberString[i].ToString());
+                if (!isBull[i])
+                {
+                    cowsCount = CountCowsForCurrentDigit(tryNumberString, cowsCount, isBull, cows, i);
+                }
             }
-        }
             return cowsCount;
         }
 
-         private  int CountCowsForCurrentDigit(
-        string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int i)
-    {
-        for (int j = 0; j < tryNumberString.Length; j++)
+        private int CountCowsForCurrentDigit(
+            string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int i)
         {
-            if (tryNumberString[i] == numberForGuessString[j])
+            for (int j = 0; j < tryNumberString.Length; j++)
             {
-                if (!bulls[j]&&!cows[j])
+                if (tryNumberString[i] == numberForGuessString[j])
                 {
-                    cows[j] = true;
-                    cowsCount++;
-                    return cowsCount;
+                    if (!bulls[j] && !cows[j])
+                    {
+                        cows[j] = true;
+                        cowsCount++;
+                        return cowsCount;
+                    }
                 }
             }
+            return cowsCount;
         }
-        return cowsCount;
-    }
     }
 }
