@@ -15,11 +15,8 @@ namespace BullsAndCows
     public class Engine
     {
         private int numberOfCheats;
-
         private int numberOfMoves;
-
         private SecretNumber numberToGuess;
-
         private bool isGuessed;
         
         /// <summary>

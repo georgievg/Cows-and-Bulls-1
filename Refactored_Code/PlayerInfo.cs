@@ -12,9 +12,6 @@ namespace BullsAndCows
     /// </summary>
     public class PlayerInfo : IComparable<PlayerInfo>
     {
-        /// <summary>
-        /// The nickname of the player
-        /// </summary>
         private string nickName;
 
         /// <summary>
