@@ -34,6 +34,19 @@ namespace BullsAndCowsTests
             var actual = HallOfFame.GenerateScoreBoard();
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void FiveIsMaximumPlayersCount()
+        {
+            HallOfFame.AddPlayerToScoreboard(5, 0, "pesho");
+            HallOfFame.AddPlayerToScoreboard(3,0,"Sashko");
+            HallOfFame.AddPlayerToScoreboard(4,0,"Petrokal");
+            HallOfFame.AddPlayerToScoreboard(7,0,"Strahil");
+            HallOfFame.AddPlayerToScoreboard(1,0,"Ceco");
+            HallOfFame.AddPlayerToScoreboard(12,0,"Yonko");
+            int actual = HallOfFame.PlayersCount;
+            
+            Assert.AreEqual(actual,5);
+        }
 
     }
 }
