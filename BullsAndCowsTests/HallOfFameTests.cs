@@ -38,14 +38,31 @@ namespace BullsAndCowsTests
         public void FiveIsMaximumPlayersCount()
         {
             HallOfFame.AddPlayerToScoreboard(5, 0, "pesho");
-            HallOfFame.AddPlayerToScoreboard(3,0,"Sashko");
-            HallOfFame.AddPlayerToScoreboard(4,0,"Petrokal");
-            HallOfFame.AddPlayerToScoreboard(7,0,"Strahil");
-            HallOfFame.AddPlayerToScoreboard(1,0,"Ceco");
-            HallOfFame.AddPlayerToScoreboard(12,0,"Yonko");
+            HallOfFame.AddPlayerToScoreboard(3, 0, "Sashko");
+            HallOfFame.AddPlayerToScoreboard(4, 0, "Petrokal");
+            HallOfFame.AddPlayerToScoreboard(7, 0, "Strahil");
+            HallOfFame.AddPlayerToScoreboard(1, 0, "Ceco");
+            HallOfFame.AddPlayerToScoreboard(12, 0, "Yonko");
             int actual = HallOfFame.PlayersCount;
-            
-            Assert.AreEqual(actual,5);
+
+            Assert.AreEqual(actual, 5);
+        }
+
+        [TestMethod]
+        public void ScoreHolderIsSorted()
+        {
+            HallOfFame.EraseScoreBoard();
+            HallOfFame.AddPlayerToScoreboard(5, 0, "atanas");
+            HallOfFame.AddPlayerToScoreboard(3, 0, "Sashko");
+            HallOfFame.AddPlayerToScoreboard(4,0,"kiril");
+
+            string scoreBoard = HallOfFame.GenerateScoreBoard();
+            int indexOfAtanas = scoreBoard.IndexOf("atanas");
+            int indexOfSashko = scoreBoard.IndexOf("Sashko");
+            int indexOfKiril = scoreBoard.IndexOf("kiril");
+
+            bool actual = (indexOfSashko < indexOfKiril) && (indexOfKiril < indexOfAtanas);
+            Assert.IsTrue(actual);
         }
 
     }

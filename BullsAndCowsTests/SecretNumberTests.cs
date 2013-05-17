@@ -35,7 +35,7 @@ namespace BullsAndCowsTests
             secretNumberTest.GetHelpingNumber();
             string actual = secretNumberTest.GetHelpingNumber();
 
-            Assert.AreEqual("The number looks like " + secretNumberTest.Value + ".\n",actual);
+            Assert.AreEqual("The number looks like " + secretNumberTest.Value + "." + Environment.NewLine,actual);
 
         }
     }

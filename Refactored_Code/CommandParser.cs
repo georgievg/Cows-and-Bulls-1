@@ -6,13 +6,13 @@
 namespace BullsAndCows
 {
     using System;
-    
+
     /// <summary>
     /// This class provides command parser logic
     /// </summary>
     public class CommandParser
     {
-        private string[] AllowedCommands{get;set;}
+        private string[] AllowedCommands { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandParser" /> class.

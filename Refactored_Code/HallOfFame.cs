@@ -48,7 +48,7 @@ namespace BullsAndCows
             if (string.IsNullOrEmpty(nickName))
             {
                 throw new NullReferenceException("NickName can not be empty");
-            }            
+            }
         }
 
         /// <summary>
@@ -57,30 +57,23 @@ namespace BullsAndCows
         /// <param name="guesses">Amount of guesses it took of the player</param>
         /// <param name="numberOfCheats">How many cheats he used</param>
         /// <param name="nick">The nickName of the player to be added</param>
-        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats,string nick)
+        public static void AddPlayerToScoreboard(int guesses, int numberOfCheats, string nick)
         {
             ValidateNickName(nick);
             if (numberOfCheats > 0)
             {
                 UserInterface.PrintCheaterMessage();
-            }            
+            }
             else
             {
-                try
+                if (scoreHolder.Count < 5)
                 {
-                    if (scoreHolder.Count < 5)
-                    {
-                        AddPlayerToScoreHolder(guesses, nick);
-                    }
-                    else if (scoreHolder[4].Guesses > guesses)
-                    {
-                        scoreHolder.RemoveAt(4);
-                        AddPlayerToScoreHolder(guesses, nick);
-                    }
+                    AddPlayerToScoreHolder(guesses, nick);
                 }
-                catch (ArgumentException e)
+                else if (scoreHolder[4].Guesses > guesses)
                 {
-                    Console.WriteLine(e.Message);
+                    scoreHolder.RemoveAt(4);
+                    AddPlayerToScoreHolder(guesses, nick);
                 }
             }
         }
@@ -124,6 +117,7 @@ namespace BullsAndCows
         {
             PlayerInfo newPlayer = new PlayerInfo(nickName, guesses);
             scoreHolder.Add(newPlayer);
+            scoreHolder.Sort();
         }
 
         /// <summary>
