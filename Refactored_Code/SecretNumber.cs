@@ -28,9 +28,9 @@ namespace BullsAndCows
         public SecretNumber()
         {
             this.helpingNumber = new char[SecretNumber.SecretNumberLenght];
-            this.numberToGuess = null;
             this.GenerateNumberForGuess();
             this.GenerateHelpingNumber();
+            this.NumberToGuess = this.numberToGuess;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace BullsAndCows
         /// <returns>True for right guess and false for opposite.</returns>
         public bool IsEqualToNumberForTry(string numberToTry)
         {
-            bool isEqualToNumberForTry = numberToTry == this.numberToGuess;
+            bool isEqualToNumberForTry = numberToTry == this.NumberToGuess;
 
             return isEqualToNumberForTry;
         }
@@ -109,6 +109,26 @@ namespace BullsAndCows
             {
                 this.helpingNumber[helpingNumberIndex] = SecretNumber.HidingSymbol;
             }
-        } 
+        }
+
+        private string NumberToGuess
+        {
+            get
+            {
+                return this.numberToGuess;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new NullReferenceException(string.Format("Number for guess the game number entered from the user can't be an empty string!"));
+                }
+                if (value.Length != 4)
+                {
+                    throw new ArgumentOutOfRangeException(string.Format("Lenght of number for guess must be exaclty 4. Actual length is {0}!", this.numberToGuess.Length));
+                }
+                this.numberToGuess = value;
+            }
+        }
     }
 }

@@ -33,12 +33,12 @@ namespace BullsAndCows
         private int CountBulls()
         {
             int bullsCount = 0;
-            for (int i = 0; i < TryNumber.Length; i++)
+            for (int numberIndex = 0; numberIndex < TryNumber.Length; numberIndex++)
             {
-                if (TryNumber[i] == NumberForGuess[i])
+                if (TryNumber[numberIndex] == NumberForGuess[numberIndex])
                 {
                     bullsCount++;
-                    isBull[i] = true;
+                    isBull[numberIndex] = true;
                 }
             }
             return bullsCount;

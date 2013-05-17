@@ -12,14 +12,14 @@ namespace BullsAndCows
     /// </summary>
     public class CommandParser
     {
-        private string[] allowedCommands;
+        private string[] AllowedCommands{get;set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandParser" /> class.
         /// </summary>
         public CommandParser()
         {
-            this.allowedCommands = new string[]
+            this.AllowedCommands = new string[]
             {
                 "top",
                 "help",
@@ -38,9 +38,9 @@ namespace BullsAndCows
             string formatedCommand = command.Trim();
 
             // Searching for game command
-            for (int commandsIndex = 0; commandsIndex < this.allowedCommands.Length; commandsIndex++)
+            for (int commandsIndex = 0; commandsIndex < this.AllowedCommands.Length; commandsIndex++)
             {
-                if (formatedCommand.Equals(this.allowedCommands[commandsIndex]))
+                if (formatedCommand.Equals(this.AllowedCommands[commandsIndex]))
                 {
                     return formatedCommand.ToLower();
                 }

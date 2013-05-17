@@ -16,16 +16,15 @@ namespace BullsAndCows
         /// <returns>
         /// Prints the amount of found Cows
         /// </returns>
-        private string numberForGuessString;
-        private int cowsCount;
-        private string tryNumberString;
+        private string numberForGuess;
+        private string tryNumber;
         private bool[] isBull;
 
         public Cow(string numberForGuess, string tryNumberString, bool[] isBull)
         {
-            this.numberForGuessString = numberForGuess;
-            this.tryNumberString = tryNumberString;
-            this.isBull = isBull;
+            this.NumberForGuess = numberForGuess;
+            this.TryNumber = tryNumberString;
+            this.IsBull = isBull;
         }
 
         /// <summary>
@@ -43,34 +42,93 @@ namespace BullsAndCows
        
         private int CountCows()
         {
-            bool[] cows = new bool[4];
-            for (int i = 0; i < tryNumberString.Length; i++)
+            bool[] isCow = new bool[4];
+            int cowsCount = 0;
+            for (int numberIndex = 0; numberIndex < this.TryNumber.Length; numberIndex++)
             {
-                //int digitForTry = int.Parse(tryNumberString[i].ToString());
-                if (!isBull[i])
+                if (!this.IsBull[numberIndex])
                 {
-                    cowsCount = CountCowsForCurrentDigit(tryNumberString, cowsCount, isBull, cows, i);
+                    cowsCount = CountCowsForCurrentDigit(this.TryNumber, cowsCount, this.IsBull, isCow, numberIndex);
                 }
             }
             return cowsCount;
         }
 
         private int CountCowsForCurrentDigit(
-            string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int i)
+            string tryNumberString, int cowsCount, bool[] bulls, bool[] cows, int numberIndex)
         {
-            for (int j = 0; j < tryNumberString.Length; j++)
+            for (int currNumberIndex = 0; currNumberIndex < tryNumberString.Length; currNumberIndex++)
             {
-                if (tryNumberString[i] == numberForGuessString[j])
+                if (tryNumberString[numberIndex] == numberForGuess[currNumberIndex])
                 {
-                    if (!bulls[j] && !cows[j])
+                    if (!bulls[currNumberIndex] && !cows[currNumberIndex])
                     {
-                        cows[j] = true;
+                        cows[currNumberIndex] = true;
                         cowsCount++;
                         return cowsCount;
                     }
                 }
             }
             return cowsCount;
+        }
+
+        private string NumberForGuess
+        {
+            get
+            {
+                return this.numberForGuess;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new NullReferenceException(string.Format("Number for guess the game number entered from the user can't be an empty string!"));
+                }
+                if (value.Length != 4)
+                {
+                    throw new ArgumentOutOfRangeException(string.Format("Lenght of number for guess must be exaclty 4. Actual length is {0}!", this.numberForGuess.Length));
+                }
+                this.numberForGuess = value;
+            }
+        }
+        private string TryNumber
+        {
+            get
+            {
+                return this.tryNumber;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new NullReferenceException(string.Format("Number for try to guess the game number entered from the user can't be an empty string!"));
+                }
+                if (value.Length != 4)
+                {
+                    throw new ArgumentOutOfRangeException(string.Format("Lenght of number for try must be exaclty 4. Actual length is {0}!", this.tryNumber.Length));
+                }
+                this.tryNumber = value;
+            }
+        }
+
+        private bool[] IsBull
+        {
+            get
+            {
+                return this.isBull;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new NullReferenceException(string.Format("isBool must be instanced befour being passed to the costrucotor of the Bull class!"));
+                }
+                if (value.Length != 4)
+                {
+                    throw new ArgumentOutOfRangeException(string.Format("Legth of isBull must be exactly 4. Actual legth is {0}!", this.isBull.Length));
+                }
+                this.isBull = value;
+            }
         }
     }
 }

@@ -90,7 +90,7 @@ namespace BullsAndCows
 
                 Console.Write("Wrong number! ");
                 string bullCount = bull.GetPrintableCount();
-                Console.WriteLine(bullCount);
+                Console.Write(bullCount);
                 string cowCount = cow.GetPrintableCount();
                 Console.WriteLine(cowCount);
             }
